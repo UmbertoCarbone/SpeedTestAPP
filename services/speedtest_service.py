@@ -3,8 +3,25 @@ Modulo per gestire i test di velocità della connessione.
 Incapsula tutta la logica di interazione con speedtest-cli.
 """
 
-import speedtest
+import sys
+import os
 import threading
+
+# Fix per PyInstaller: quando l'app è "frozen" (compilata),
+# sys.stdout/stderr potrebbero essere None. speedtest-cli prova
+# ad accedere a .fileno() su questi oggetti, causando l'errore.
+# Creiamo dei file handle fittizi se necessario.
+if getattr(sys, 'frozen', False):
+    # Applicazione frozen (compilata con PyInstaller)
+    if sys.stdout is None or not hasattr(sys.stdout, 'fileno'):
+        # Reindirizza stdout verso un file temporaneo o devnull
+        sys.stdout = open(os.devnull, 'w')
+    if sys.stderr is None or not hasattr(sys.stderr, 'fileno'):
+        sys.stderr = open(os.devnull, 'w')
+    if sys.stdin is None or not hasattr(sys.stdin, 'fileno'):
+        sys.stdin = open(os.devnull, 'r')
+
+import speedtest
 
 class SpeedTestService:
     """Servizio per eseguire test di velocità della connessione internet"""

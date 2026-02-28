@@ -22,7 +22,12 @@ class AppWindow(customtkinter.CTk):
         self.geometry("400x350")
         self.minsize(400, 350)
         self.maxsize(400, 350)
-        self.iconbitmap("icon.ico")
+        
+        # Prova a caricare l'icona, se fallisce continua senza
+        try:
+            self.iconbitmap("icon.ico")
+        except Exception as e:
+            print(f"Avviso: Impossibile caricare l'icona: {e}")
         
         # Configurazione griglia
         self.grid_columnconfigure(0, weight=1)
@@ -57,34 +62,38 @@ class AppWindow(customtkinter.CTk):
         )
     
     def _handle_start_test(self):
-        """Gestisce l'avvio del test"""
-        # Configura lo stato UI
-        self.control_panel.set_testing_state()
-        self._stop_requested = False
-        self.results_panel.reset()
         
-        # Avvia animazione ping
-        self.animator.start("ping", self)
+            # Disabilita il bottone tema
+            self.theme_button.set_enabled(False)
+            # Configura lo stato UI
+            self.control_panel.set_testing_state()
+            self._stop_requested = False
+            self.results_panel.reset()
         
-        # Prepara i callback per il servizio speedtest
-        callbacks = {
-            'on_ping': self._on_ping_complete,
-            'on_download': self._on_download_complete,
-            'on_upload': self._on_upload_complete,
-            'on_error': self._on_test_error,
-            'on_progress_check': lambda: self._stop_requested
-        }
+            # Avvia animazione ping
+            self.animator.start("ping", self)
         
-        # Avvia il test in modo asincrono
-        self.speedtest_service.run_test_async(callbacks, self._on_test_complete)
+            # Prepara i callback per il servizio speedtest
+            callbacks = {
+                'on_ping': self._on_ping_complete,
+                'on_download': self._on_download_complete,
+                'on_upload': self._on_upload_complete,
+                'on_error': self._on_test_error,
+                'on_progress_check': lambda: self._stop_requested
+            }
+        
+            # Avvia il test in modo asincrono
+            self.speedtest_service.run_test_async(callbacks, self._on_test_complete)
     
     def _handle_stop_test(self):
-        """Gestisce l'interruzione del test"""
-        self._stop_requested = True
-        self._test_completed = False
-        self.animator.stop()
-        self.results_panel.reset()
-        self.control_panel.set_idle_state(enable_reset=False)
+        
+            self._stop_requested = True
+            self._test_completed = False
+            self.animator.stop()
+            self.results_panel.reset()
+            self.control_panel.set_idle_state(enable_reset=False)
+            # Riabilita il bottone tema
+            self.theme_button.set_enabled(True)
     
     def _handle_reset_results(self):
         """Gestisce l'azzeramento dei risultati"""
@@ -118,16 +127,20 @@ class AppWindow(customtkinter.CTk):
         self._test_completed = True
     
     def _on_test_error(self, error):
-        """Callback chiamata in caso di errore"""
-        self.animator.stop()
-        self.results_panel.reset()
-        self.results_panel.update_error(f"Errore: {str(error)[:50]}")
-        print(f"Errore durante il test: {error}")
-        self._test_completed = False
+       
+            self.animator.stop()
+            self.results_panel.reset()
+            self.results_panel.update_error(f"Errore: {str(error)[:50]}")
+            print(f"Errore durante il test: {error}")
+            self._test_completed = False
+            # Riabilita il bottone tema
+            self.theme_button.set_enabled(True)
     
     def _on_test_complete(self, success):
-        """Callback chiamata al termine del test"""
-        self.control_panel.set_idle_state(enable_reset=success and self._test_completed)
+      
+            self.control_panel.set_idle_state(enable_reset=success and self._test_completed)
+            # Riabilita il bottone tema
+            self.theme_button.set_enabled(True)
     
     def _on_animation_update(self, phase, dots):
         """Callback per aggiornare l'animazione dei pallini"""

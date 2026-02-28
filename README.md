@@ -92,9 +92,13 @@ Gestisce l'animazione dei pallini:
 
 ## 🚀 Come Eseguire
 
+### Sviluppo
 ```bash
 python main.py
 ```
+
+### Distribuzione
+Vedi [BUILD.md](BUILD.md) per creare l'installer professionale.
 
 ## 📚 Pattern Utilizzati
 
