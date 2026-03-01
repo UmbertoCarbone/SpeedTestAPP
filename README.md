@@ -6,6 +6,9 @@ Applicazione moderna per testare la velocità della connessione internet con int
   <img src="icon.ico" alt="SpeedApp Icon" width="200"/>
 </p>
 
+Scarica l’ultima versione qui:  
+[SpeedApp_v1.0.1.zip](https://github.com/UmbertoCarbone/SpeedTestAPP/releases/download/v1.0.1/SpeedApp_v1.0.1.zip)
+
 ## 📚 Librerie Utilizzate
 
 - **customtkinter** - Framework per interfaccia grafica moderna e responsiva
