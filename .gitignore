@@ -41,5 +41,5 @@ htmlcov/
 *.pyz
 warn-*.txt
 xref-*.html
-icon.ico
+
 setup.iss

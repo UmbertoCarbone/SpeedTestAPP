@@ -27,30 +27,4 @@ SpeedApp è un'applicazione desktop che permette di misurare la velocità della 
 🛑 Possibilità di interrompere il test in qualsiasi momento  
 🔄 Reset rapido per nuovi test
 
-## 🏗️ Architettura del Progetto
 
-Struttura modulare professionale Python:
-
-```
-SpeedTestAPP/
-├── main.py                          # Entry point dell'applicazione
-│
-├── ui/                              # Interfaccia utente
-│   ├── app_window.py               # Finestra principale
-│   └── widgets/                    # Componenti UI riutilizzabili
-│       ├── theme_button.py         # Bottone cambio tema
-│       ├── results_panel.py        # Panel risultati
-│       └── control_panel.py        # Bottoni controllo
-│
-├── services/                       # Business logic
-│   └── speedtest_service.py       # Servizio per test di velocità
-│
-└── utils/                          # Utilities
-    └── animations.py               # Animazione pallini
-```
-
-## 💻 Come Eseguire
-
-```bash
-python main.py
-```
