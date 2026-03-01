@@ -77,9 +77,24 @@ class ControlPanel:
     
     def set_idle_state(self, enable_reset=False):
         """Configura lo stato dei bottoni quando non c'è test in corso"""
-        self.start_button.configure(state="normal")
+        self.start_button.configure(state="normal", text="Avvia Speedtest")
         self.stop_button.configure(state="disabled")
         if enable_reset:
             self.reset_button.configure(state="normal")
         else:
             self.reset_button.configure(state="disabled")
+    
+    def start_countdown(self, parent_widget, on_complete, seconds=5):
+        """Avvia un countdown sul pulsante Avvia prima di riabilitarlo"""
+        self.start_button.configure(state="disabled")
+        self.stop_button.configure(state="disabled")
+        self.reset_button.configure(state="disabled")
+        
+        def _countdown(remaining):
+            if remaining > 0:
+                self.start_button.configure(text=f"Attendere {remaining}...")
+                parent_widget.after(1000, lambda: _countdown(remaining - 1))
+            else:
+                on_complete()
+        
+        _countdown(seconds)

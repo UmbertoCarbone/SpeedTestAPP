@@ -41,13 +41,14 @@ class ResultsPanel:
         self.progress_bar = customtkinter.CTkProgressBar(parent, width=340)
         self.progress_bar.grid(row=4, column=0, columnspan=2, padx=20, pady=(5, 10), sticky="ew")
         self.progress_bar.set(0)
+        self.progress_bar.grid_remove()  # Nasconde la barra inizialmente
     
     def update_ping(self, value):
         """Aggiorna il valore del ping"""
         if isinstance(value, str):
             self.label_ping.configure(text=value)
         else:
-            self.label_ping.configure(text=f"Ping: {value:.2f} ms")
+            self.label_ping.configure(text=f"Ping: {int(value)} ms")
     
     def update_download(self, value):
         """Aggiorna il valore del download"""
@@ -69,6 +70,8 @@ class ResultsPanel:
     
     def update_progress(self, value):
         """Aggiorna la barra di avanzamento (0.0 - 1.0)"""
+        # Mostra la barra quando viene aggiornata
+        self.progress_bar.grid(row=4, column=0, columnspan=2, padx=20, pady=(5, 10), sticky="ew")
         self.progress_bar.set(value)
     
     def reset(self):
@@ -78,3 +81,4 @@ class ResultsPanel:
         self.label_upload.configure(text="Upload: - Mbps")
         self.label_error.configure(text="")
         self.progress_bar.set(0)
+        self.progress_bar.grid_remove()  # Nasconde la barra

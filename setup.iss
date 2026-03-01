@@ -2,11 +2,11 @@
 ; Compila con Inno Setup Compiler: https://jrsoftware.org/isdl.php
 
 [Setup]
-AppName=Speed App
-AppVersion=1.0.0
+AppName=SpeedTest App
+AppVersion=1.0.1
 AppPublisher=UmbertoCarbone
 DefaultDirName={autopf}\SpeedApp
-DefaultGroupName=Speed App
+DefaultGroupName=SpeedTest App
 OutputDir=installer_output
 OutputBaseFilename=SpeedApp_Setup_1.0.1
 Compression=lzma2
@@ -27,9 +27,9 @@ Source: "dist\SpeedApp.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\Speed App"; Filename: "{app}\SpeedApp.exe"
-Name: "{group}\Disinstalla Speed App"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\Speed App"; Filename: "{app}\SpeedApp.exe"; Tasks: desktopicon
+Name: "{group}\SpeedTest App"; Filename: "{app}\SpeedApp.exe"
+Name: "{group}\Disinstalla SpeedTest App"; Filename: "{uninstallexe}"
+Name: "{autodesktop}\SpeedTest App"; Filename: "{app}\SpeedApp.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\SpeedApp.exe"; Description: "Avvia Speed App"; Flags: postinstall nowait skipifsilent
+Filename: "{app}\SpeedApp.exe"; Description: "Avvia SpeedTest App"; Flags: postinstall nowait skipifsilent

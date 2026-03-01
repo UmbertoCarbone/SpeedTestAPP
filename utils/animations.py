@@ -27,6 +27,9 @@ class DotAnimator:
             phase: Nome della fase (ping, download, upload)
             widget: Widget che gestisce il metodo after()
         """
+        # Ferma eventuali animazioni precedenti
+        self.stop()
+        
         self._current_phase = phase
         self._running = True
         self._dot_count = 0
@@ -36,9 +39,10 @@ class DotAnimator:
     def stop(self):
         """Ferma l'animazione"""
         self._running = False
-        if self._after_id:
+        if self._after_id and hasattr(self, '_widget'):
             try:
                 self._widget.after_cancel(self._after_id)
+                self._after_id = None
             except:
                 pass
         
