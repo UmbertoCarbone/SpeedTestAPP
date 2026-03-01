@@ -2,7 +2,9 @@
 
 Applicazione moderna per testare la velocità della connessione internet con interfaccia grafica.
 
-![SpeedApp Icon](icon.ico)
+<p align="center">
+  <img src="icon.ico" alt="SpeedApp Icon" width="200"/>
+</p>
 
 ## 📚 Librerie Utilizzate
 
