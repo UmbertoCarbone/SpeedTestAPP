@@ -51,7 +51,7 @@ class SpeedTestService:
             # ===== FASE 1: TEST DEL PING =====
             # Crea istanza Speedtest
             st = speedtest.Speedtest(secure=True)
-            st.timeout = 10
+            
             # Trova il server migliore
             st.get_best_server()
             
