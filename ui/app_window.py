@@ -19,7 +19,7 @@ class AppWindow(customtkinter.CTk):
         super().__init__()
 
         # Configurazione finestra
-        self.title("Speed App")
+        self.title("SpeedTest App")
         self.geometry("400x350")
         self.minsize(400, 350)
         self.maxsize(400, 350)
